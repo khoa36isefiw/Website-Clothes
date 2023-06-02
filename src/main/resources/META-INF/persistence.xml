@@ -4,21 +4,69 @@
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.0">
     <persistence-unit name="JPAConnection" transaction-type="RESOURCE_LOCAL">
-            <class>com.example.demo3.business.User</class>
-        <class>com.example.demo3.business.Account</class>
-            <properties>
-                <property name="javax.persistence.jdbc.url"
-                          value="jdbc:mysql://localhost:3306/demo3"/>
-                <property name="javax.persistence.jdbc.Driver"
-                          value="com.mysql.cj.jdbc.Driver"/>
-                <property name="javax.persistence.jdbc.user" value="root"/>
-                <property name="javax.persistence.jdbc.password" value="1410"/>
-                <property name="hibernate.hbm2ddl.auto"
-                          value="update" />
-            </properties>
+
+
+
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
 
 
 
 
+
+
+        <properties>
+            <property name="javax.persistence.jdbc.url"
+                      value="jdbc:mysql://us-cdbr-east-06.cleardb.net/heroku_1b4a8fa74638eb6"/>
+            <property name="javax.persistence.jdbc.driver"
+                      value="com.mysql.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.user" value="b577879b548066"/>
+            <property name="javax.persistence.jdbc.password" value="f8df1f80"/>
+            <property name="javax.persistence.schema-generation.database.action"
+                      value="none"/>
+        </properties>
     </persistence-unit>
 </persistence>
+        <!--
+        <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+        <persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+                     version="3.0">
+            <persistence-unit name="JPAConnection" transaction-type="RESOURCE_LOCAL">
+                <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+                <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        &lt;!&ndash;
+                <class>com.example.demo3.business.Account</class>
+                <class>com.example.demo3.business.User</class>
+                <class>com.example.demo3.business.Product</class>
+                <class>com.example.demo3.business.CartItem</class>
+                <class>com.example.demo3.business.ShippingInfo</class>
+                <class>com.example.demo3.business.Cart</class>
+                <class>com.example.demo3.business.Order</class>&ndash;&gt;
+
+
+                <properties>
+                    <property name="javax.persistence.jdbc.url"
+                              value="jdbc:mysql://localhost:3306/demo4"/>
+                    <property name="javax.persistence.jdbc.driver"
+                              value="com.mysql.jdbc.Driver"/>
+                    <property name="javax.persistence.jdbc.user" value="root"/>
+                    <property name="javax.persistence.jdbc.password" value="1410"/>
+                    <property name="javax.persistence.schema-generation.database.action"
+                              value="update"/>
+                </properties>
+
+                &lt;!&ndash;<properties>
+                    <property name="hibernate.connection.url"
+                              value="jdbc:mysql://us-cdbr-east-06.cleardb.net/heroku_1b4a8fa74638eb6"/>
+                    <property name="hibernate.connection.driver_class"
+                              value="com.mysql.cj.jdbc.Driver"/>
+                    <property name="hibernate.connection.user" value="b577879b548066"/>
+                    <property name="hibernate.connection.password" value="f8df1f80"/>
+                    <property name="hibernate.hbm2ddl.auto"
+                              value="update" />
+                </properties>&ndash;&gt;
+            </persistence-unit>
+        </persistence>
+        -->

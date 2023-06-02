@@ -1,14 +1,15 @@
 package com.example.demo3.data;
 
 import com.example.demo3.business.Account;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.NoResultException;
-import jakarta.persistence.TypedQuery;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
+
 
 public class AccountDAO {
     public static void insert(Account account) {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityManager em = DBUtil.getEmFactory().createEntityManager(); // apply singleton
         EntityTransaction trans = em.getTransaction();
         trans.begin();
         try {
@@ -23,19 +24,17 @@ public class AccountDAO {
     }
 
 
-
     public static Boolean findAccount(Account account) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        String qString = "SELECT a FROM Account a "
-                + "WHERE a.username = :username and a.password= :pass";
+        String qString = "SELECT a FROM Account a WHERE a.username = :username and a.password= :pass";
         TypedQuery<Account> q = em.createQuery(qString, Account.class);
         q.setParameter("username", account.getUsername());
         q.setParameter("pass", account.getPassword());
         Account result = null;
         try {
             result = q.getSingleResult();
-            System.out.println("Username: " + result.getUsername());
-            System.out.println("Password: " + result.getPassword());
+            /*System.out.println("Username: " + result.getUsername());
+            System.out.println("Password: " + result.getPassword());*/
         } catch (NoResultException ex) {
             return false;
         } finally {
@@ -44,6 +43,22 @@ public class AccountDAO {
 
         return result != null;
     }
+
+    public static void update(Account account) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        trans.begin();
+        try {
+            em.merge(account);
+            trans.commit();
+        } catch (Exception e) {
+            System.out.println(e);
+            trans.rollback();
+        } finally {
+            em.close();
+        }
+    }
+
     public static Account findAccountByUsername(String username) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         String qString = "SELECT a FROM Account a "
@@ -63,4 +78,5 @@ public class AccountDAO {
 
         return result;
     }
+
 }
